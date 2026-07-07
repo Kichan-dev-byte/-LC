@@ -1,0 +1,6 @@
+{
+  "name": "LAN Computer Shop Management System",
+  "description": "A comprehensive production-grade LAN Computer Shop Management platform. It features real-time device grid monitoring, client remote control pipelines (lock, unlock, reboot, message), membership registration, hourly/prepaid rate matrices, automatic credit depleting timers, and detailed cashier sales auditing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

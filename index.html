@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+    <script>
+      // Safety safeguard for sandboxed iframe environments where browser extensions
+      // might try to call chrome.runtime APIs and fail due to sandbox constraints.
+      (function() {
+        try {
+          if (typeof window !== 'undefined') {
+            if (!window.chrome) {
+              window.chrome = {};
+            }
+            if (!window.chrome.runtime) {
+              window.chrome.runtime = {};
+            }
+            if (typeof window.chrome.runtime.getManifest !== 'function') {
+              window.chrome.runtime.getManifest = function() {
+                return { manifest_version: 3, name: "Sandbox App", version: "1.0.0" };
+              };
+            }
+            if (typeof window.chrome.runtime.sendMessage !== 'function') {
+              window.chrome.runtime.sendMessage = function() {
+                return Promise.resolve({});
+              };
+            }
+            if (typeof window.chrome.runtime.connect !== 'function') {
+              window.chrome.runtime.connect = function() {
+                return { onMessage: { addListener: function() {} }, onDisconnect: { addListener: function() {} }, postMessage: function() {} };
+              };
+            }
+          }
+        } catch (e) {
+          console.warn('Extension sandbox polyfill check:', e);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
